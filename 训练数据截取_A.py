@@ -46,13 +46,7 @@ AI打开=True
 
 
 def get_key_name(key):
-    if isinstance(key, keyboard.KeyCode):
-
-
-        return key.char
-    else:
-
-        return str(key)
+   return key.char if isinstance(key, keyboard.KeyCode) else str(key)
 # 监听按压
 def on_press(key):
     global fun_start,time_interval,index,dict,count,count_dict,W键按下,S键按下,A键按下,D键按下,手动模式,操作列,AI打开,攻击放开,Q键按下,攻击态

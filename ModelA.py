@@ -7,7 +7,7 @@ import copy
 import os.path
 import torchvision
 def get_clones(module, N):
-    return nn.ModuleList([copy.deepcopy(module) for i in range(N)])
+    return nn.ModuleList([copy.deepcopy(module) for _ in range(N)])
 
 
     
@@ -47,8 +47,7 @@ class Transformer(nn.Module):
         图向量=self.图转(图向量)
 
         d_output = self.decoder(图向量,操作 , trg_mask)
-        output = self.out(d_output)
-        return output
+        return self.out(d_output)
 
 class RESNET_Transformer(nn.Module):
     def __init__(self,  trg_vocab, d_model, N, heads, dropout,图向量尺寸=1000):
@@ -74,7 +73,7 @@ def get_model(opt,  trg_vocab,model_weights='model_weights'):
     assert opt.dropout < 1
 
     model = Transformer( trg_vocab, opt.d_model, opt.n_layers, opt.heads, opt.dropout)
-       
+
     if opt.load_weights is not None and os.path.isfile(opt.load_weights+'/'+model_weights):
         print("loading pretrained weights...")
         model.load_state_dict(torch.load(f'{opt.load_weights}/'+model_weights))
@@ -90,7 +89,7 @@ def get_model(opt,  trg_vocab,model_weights='model_weights'):
                 点数 = p.shape[j] * 点数
 
             量 += 点数
-        print('使用参数:{}百万'.format(量/1000000))
+        print(f'使用参数:{量 / 1000000}百万')
     return model
 
 
@@ -115,5 +114,5 @@ def get_modelB(opt, trg_vocab):
                 点数 = p.shape[j] * 点数
 
             量 += 点数
-        print('使用参数:{}百万'.format(量 / 1000000))
+        print(f'使用参数:{量 / 1000000}百万')
     return model

@@ -68,32 +68,21 @@ def 生成训练用numpy数组(输入表单, 词_数表, numpy数组路径):
         表_3 = []
         for 字符 in 表单:
             if (u'\u0041' <= 字符 <= u'\u005a') or (u'\u0061' <= 字符 <= u'\u007a'):
-                if 临 == '':
-
-                    临 = 字符
-                else:
-                    临 = 临 + 字符
+                临 = 字符 if 临 == '' else 临 + 字符
             else:
 
-                if 临 == '':
-
-                    if 字符.lower() in 词_数表:
-
-                         表_3.append(词_数表[字符.lower()])
-                    else:
-                        表_3.append(14999)
-                else:
+                if 临 != '':
                     if 临.lower() in 词_数表:
 
                         表_3.append(词_数表[临.lower()])
                     else:
                         表_3.append(14999)
                     临 = ''
-                    if 字符.lower() in 词_数表:
+                if 字符.lower() in 词_数表:
 
-                        表_3.append(词_数表[字符.lower()])
-                    else:
-                        表_3.append(14999)
+                     表_3.append(词_数表[字符.lower()])
+                else:
+                    表_3.append(14999)
         if 临 != '':
             if 临.lower() in 词_数表:
 
@@ -108,10 +97,10 @@ def 生成训练用numpy数组(输入表单, 词_数表, numpy数组路径):
             print(表_3)
         else:
 
-            表_1.append(np.array(表_3[0:-1]))
+            表_1.append(np.array(表_3[:-1]))
             表_2.append(np.array(表_3[1:]))
         if i % 1000 == 0:
-            print("数据转化为numpy数组完成度百分比{}".format(i / len(输入表单) * 100))
+            print(f"数据转化为numpy数组完成度百分比{i / len(输入表单) * 100}")
         i = i + 1
     print("数据转化为numpy数组完成。")
 
@@ -128,8 +117,7 @@ def 生成测试用numpy数组(输入表单, 词_数表):
             表_1.append(词_数表[字符])
         else:
             表_1.append(14999)
-    输入np = np.array(表_1)
-    return (输入np)
+    return np.array(表_1)
 def 生成训练用numpy数组_A(输入表单,  词_数表, numpy数组路径):
     表_1 = []
 
@@ -141,32 +129,21 @@ def 生成训练用numpy数组_A(输入表单,  词_数表, numpy数组路径):
         表_3=[]
         for 字符 in 表单:
             if (u'\u0041' <= 字符 <= u'\u005a') or (u'\u0061' <= 字符 <= u'\u007a'):
-                if 临 == '':
-
-                    临 = 字符
-                else:
-                    临 = 临 + 字符
+                临 = 字符 if 临 == '' else 临 + 字符
             else:
 
-                if 临 == '':
-
-                    if 字符.lower() in 词_数表:
-                        if 字符 != ' ':
-                            表_3.append(词_数表[字符.lower()])
-                    else:
-                        表_3.append(14999)
-                else:
+                if 临 != '':
                     if 临.lower() in 词_数表:
                         if 临 != ' ':
                             表_3.append(词_数表[临.lower() ])
                     else:
                         表_3.append(14999)
                     临=''
-                    if 字符.lower() in 词_数表:
-                        if 字符 != ' ':
-                            表_3.append(词_数表[字符.lower() ])
-                    else:
-                        表_3.append(14999)
+                if 字符.lower() in 词_数表:
+                    if 字符 != ' ':
+                        表_3.append(词_数表[字符.lower()])
+                else:
+                    表_3.append(14999)
         if 临!='':
             if 临.lower() in 词_数表:
                 if 字符 != ' ':
@@ -182,10 +159,10 @@ def 生成训练用numpy数组_A(输入表单,  词_数表, numpy数组路径):
             print(表_3)
         else:
 
-            表_1.append(np.array(表_3[0:-1]))
+            表_1.append(np.array(表_3[:-1]))
             表_2.append(np.array(表_3[1:]))
         if i % 1000 == 0:
-            print("数据转化为numpy数组完成度百分比{}".format(i/len(输入表单)*100))
+            print(f"数据转化为numpy数组完成度百分比{i/len(输入表单) * 100}")
         i = i + 1
     print("数据转化为numpy数组完成。")
 
@@ -215,21 +192,10 @@ def 生成测试用numpy数组_A(输入表单, 词_数表):
     for 字符 in 输入表单:
         if 字符.lower() in 词_数表:
             if (u'\u0041' <= 字符 <= u'\u005a') or (u'\u0061' <= 字符 <= u'\u007a'):
-                if 临 == '':
-
-                    临 = 字符
-                else:
-                    临 = 临 + 字符
+                临 = 字符 if 临 == '' else 临 + 字符
             else:
 
-                if 临 == '':
-
-                    if 字符.lower() in 词_数表:
-                        if 字符.lower() != ' ':
-                            表_3.append(词_数表[字符.lower()])
-                    else:
-                        表_3.append(14999)
-                else:
+                if 临 != '':
                     if 临.lower() in 词_数表:
                         if 临.lower() != ' ':
 
@@ -237,11 +203,9 @@ def 生成测试用numpy数组_A(输入表单, 词_数表):
                     else:
                         表_3.append(14999)
                     临 = ''
-                    if 字符.lower() in 词_数表:
-                        if 字符.lower() != ' ':
-
-                            表_3.append(词_数表[字符.lower()])
-                    else:
-                        表_3.append(14999)
-    输入np = np.array(表_3)
-    return (输入np)
+                if 字符.lower() in 词_数表:
+                    if 字符.lower() != ' ':
+                        表_3.append(词_数表[字符.lower()])
+                else:
+                    表_3.append(14999)
+    return np.array(表_3)
